@@ -35,7 +35,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            Own a brick, participate in real cabin revenue, verified and private.
+            Join an exclusive membership ecosystem backed by premium Arctic real estate. Experience the fusion of transparent revenue participation, priority booking access, and the future of RWA utility
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
