@@ -27,11 +27,11 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="aurora-text">Aurora Vault</span>
+            <span className="aurora-text drop-shadow-[0_0_24px_hsl(35_80%_55%/0.5)]">Aurora Vault</span>
             <br />
-            <span className="text-foreground">Secure Arctic Assets,</span>
+            <span className="text-foreground">Get Access to Arctic RWA,</span>
             <br />
-            <span className="text-foreground">Transparent Revenue</span>
+            <span className="text-foreground">Verified Utility</span>
           </h1>
 
           <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
