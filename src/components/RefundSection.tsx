@@ -39,13 +39,39 @@ const RefundSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="glass rounded-2xl p-8 text-center"
+          className="glass rounded-2xl p-10 border border-accent/30 shadow-[0_0_40px_hsl(35_80%_55%/0.15),0_0_80px_hsl(160_60%_45%/0.08)]"
         >
-          <RotateCcw className="h-8 w-8 text-accent mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-foreground font-serif mb-2">Request Refund</h2>
-          <p className="text-muted-foreground text-sm mb-6 max-w-md mx-auto">
-            One brick per investor refunded instantly; larger requests handled within 24h for security and rightful ownership.
-          </p>
+          <RotateCcw className="h-10 w-10 text-accent mx-auto mb-5" />
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground font-serif mb-2">Request Refund</h2>
+          <h3 className="text-lg font-semibold aurora-text mb-6">Our Refund &amp; Protection Policy</h3>
+
+          <div className="text-left max-w-xl mx-auto space-y-4 mb-8">
+            <p className="text-foreground text-sm leading-relaxed">
+              We prioritize the safety of your capital over automated speed. To protect our members from wallet compromises or unauthorized withdrawals, all refunds are subject to <span className="aurora-text font-semibold">Manual Identity Verification</span>.
+            </p>
+
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                <p className="text-foreground text-sm">
+                  <span className="font-semibold text-accent">24-Hour Processing:</span> Once requested, our team verifies the rightful owner and processes the refund within 24 hours.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                <p className="text-foreground text-sm">
+                  <span className="font-semibold text-primary">Flexible Exit:</span> You may request a refund at any point prior to the final cabin purchase.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                <p className="text-foreground text-sm">
+                  <span className="font-semibold text-accent">Terms:</span> 90% of the contribution is returned to the original source, with 10% retained to cover ecosystem setup and administrative costs.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <Button variant="warm" className="rounded-xl px-8" onClick={handleRefund}>
             Request Refund
           </Button>
