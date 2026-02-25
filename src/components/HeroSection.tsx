@@ -26,13 +26,12 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="aurora-text drop-shadow-[0_0_24px_hsl(35_80%_55%/0.5)]">Aurora Vault</span>
-            <br />
-            <span className="text-foreground">Get Access to Arctic RWA,</span>
-            <br />
-            <span className="text-foreground">Verified Utility</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-none">
+            <span className="aurora-text drop-shadow-[0_0_30px_hsl(35_80%_55%/0.6)]">Aurora Vault</span>
           </h1>
+          <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-foreground/90 mb-6">
+            Get Access to Arctic RWA, Verified Utility
+          </p>
 
           <p className="text-lg md:text-xl text-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Join an exclusive membership ecosystem backed by <span className="aurora-text">premium Arctic real estate</span>. Experience the fusion of <span className="aurora-text">transparent revenue participation</span>, priority booking access, and the future of <span className="aurora-text">RWA utility</span>
