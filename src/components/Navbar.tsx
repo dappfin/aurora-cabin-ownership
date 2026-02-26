@@ -11,7 +11,7 @@ const Navbar = () => (
     <div className="container mx-auto px-6 h-16 flex items-center justify-between">
       <span className="aurora-text font-serif text-xl font-bold">Aurora Vault</span>
       <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-        <a href="#buy" className="hover:text-foreground transition-colors">Buy Bricks</a>
+        <a href="#buy" className="hover:text-foreground transition-colors">Buy Keys</a>
         <a href="#treasury" className="hover:text-foreground transition-colors">Treasury</a>
         <a href="#waitlist" className="hover:text-foreground transition-colors">Waitlist</a>
       </div>

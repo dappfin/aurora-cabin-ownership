@@ -40,7 +40,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="aurora" size="lg" className="text-base px-8 py-6 rounded-xl">
               <Wallet className="mr-2 h-5 w-5" />
-              Buy Bricks → Connect Wallet
+              Buy Keys → Connect Wallet
             </Button>
             <Button variant="ghost-snow" size="lg" className="text-base px-8 py-6 rounded-xl">
               View Waitlist for Cabins 2 & 3
