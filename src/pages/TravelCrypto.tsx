@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 const TravelCrypto = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      {/* Ambient glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/8 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       {/* Nav */}
       <motion.nav
@@ -29,31 +30,31 @@ const TravelCrypto = () => {
       </motion.nav>
 
       {/* Hero */}
-      <main className="pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-4xl text-center">
+      <main className="pt-36 pb-24 px-6 flex items-center justify-center min-h-screen">
+        <div className="container mx-auto max-w-5xl text-center">
           {/* Travel Icons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-8 mb-12"
+            className="flex items-center justify-center gap-10 md:gap-14 mb-14"
           >
             {[
-              { icon: Plane, label: "Flights" },
-              { icon: Hotel, label: "Hotels" },
-              { icon: Car, label: "Car Rental" },
-            ].map(({ icon: Icon, label }, i) => (
+              { icon: Plane, label: "Flights", color: "text-primary" },
+              { icon: Hotel, label: "Hotels", color: "text-accent" },
+              { icon: Car, label: "Car Rental", color: "text-primary" },
+            ].map(({ icon: Icon, label, color }, i) => (
               <motion.div
                 key={label}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 + i * 0.15 }}
-                className="flex flex-col items-center gap-2"
+                className="flex flex-col items-center gap-3"
               >
-                <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center border border-primary/20">
-                  <Icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl glass flex items-center justify-center border border-primary/30 shadow-[0_0_20px_hsl(160_60%_45%/0.15)] hover:shadow-[0_0_30px_hsl(160_60%_45%/0.25)] transition-all duration-500">
+                  <Icon className={`w-9 h-9 md:w-11 md:h-11 ${color}`} strokeWidth={1.5} />
                 </div>
-                <span className="text-xs text-muted-foreground font-medium">{label}</span>
+                <span className="text-sm md:text-base text-foreground/80 font-semibold tracking-wide">{label}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -63,11 +64,11 @@ const TravelCrypto = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif leading-tight mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold font-serif leading-tight mb-8"
           >
-            <span className="text-foreground">Travel Anywhere.</span>
+            <span className="text-foreground drop-shadow-[0_0_20px_hsl(210_20%_92%/0.15)]">Travel Anywhere.</span>
             <br />
-            <span className="aurora-text drop-shadow-[0_0_24px_hsl(160_60%_45%/0.4)]">
+            <span className="aurora-text drop-shadow-[0_0_30px_hsl(160_60%_45%/0.5)]">
               Pay with Crypto.
             </span>
           </motion.h1>
@@ -77,10 +78,10 @@ const TravelCrypto = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto mb-14 leading-relaxed"
           >
             Book flights, hotels, and rental cars worldwide using your crypto wallet —{" "}
-            <span className="text-foreground font-medium">secure, simple, and trusted.</span>
+            <span className="text-foreground font-semibold">secure, simple, and trusted.</span>
           </motion.p>
 
           {/* CTA Buttons */}
@@ -88,20 +89,22 @@ const TravelCrypto = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.65 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+            className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-14"
           >
-            <Button
-              variant="aurora"
-              size="lg"
-              className="rounded-2xl px-10 py-6 text-base gap-3 hover:shadow-[0_0_40px_hsl(160_60%_45%/0.3)] transition-all duration-500"
-            >
-              Start Booking
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+            <a href="https://www.travala.com/ref/EGSPNL" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="aurora"
+                size="lg"
+                className="rounded-2xl px-12 py-7 text-lg gap-3 shadow-[0_0_30px_hsl(160_60%_45%/0.25)] hover:shadow-[0_0_50px_hsl(160_60%_45%/0.4)] hover:scale-105 transition-all duration-500"
+              >
+                Start Booking
+                <ArrowRight className="w-6 h-6" />
+              </Button>
+            </a>
             <Button
               variant="ghost-snow"
               size="lg"
-              className="rounded-2xl px-10 py-6 text-base"
+              className="rounded-2xl px-12 py-7 text-lg hover:bg-foreground/10 transition-all duration-300"
             >
               Learn More
             </Button>
@@ -112,16 +115,16 @@ const TravelCrypto = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground"
+            className="flex flex-col sm:flex-row items-center justify-center gap-8 text-base text-foreground/60"
           >
             {[
               { icon: Globe, text: "Trusted global travel platform" },
               { icon: Coins, text: "BTC, ETH, USDT & 90+ cryptos" },
               { icon: Shield, text: "Secure booking experience" },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2">
-                <Icon className="w-4 h-4 text-primary/70" strokeWidth={1.5} />
-                <span>{text}</span>
+              <div key={text} className="flex items-center gap-2.5">
+                <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                <span className="font-medium">{text}</span>
               </div>
             ))}
           </motion.div>
