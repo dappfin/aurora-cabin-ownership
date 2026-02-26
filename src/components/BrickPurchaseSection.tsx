@@ -8,10 +8,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const PRICE_PER_BRICK = 200;
+const PRICE_PER_KEY = 200;
 
 const BrickPurchaseSection = () => {
-  const [brickCount, setBrickCount] = useState(1);
+  const [keyCount, setKeyCount] = useState(1);
 
   return (
     <section id="buy" className="py-24 px-6">
@@ -26,7 +26,7 @@ const BrickPurchaseSection = () => {
           <div className="flex items-center gap-3 mb-2">
             <ShieldCheck className="h-6 w-6 text-primary" />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground font-serif">
-              Purchase Bricks
+              Purchase Keys
             </h2>
           </div>
           <p className="text-muted-foreground mb-8">
@@ -42,19 +42,19 @@ const BrickPurchaseSection = () => {
           {/* Brick selector */}
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Bricks</span>
+              <span className="text-muted-foreground">Keys</span>
               <div className="flex items-center gap-4">
                 <button
-                  onClick={() => setBrickCount(Math.max(1, brickCount - 1))}
+                  onClick={() => setKeyCount(Math.max(1, keyCount - 1))}
                   className="h-10 w-10 rounded-lg bg-secondary flex items-center justify-center text-foreground hover:bg-secondary/80 transition-colors"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
                 <span className="text-2xl font-bold text-foreground w-12 text-center">
-                  {brickCount}
+                  {keyCount}
                 </span>
                 <button
-                  onClick={() => setBrickCount(brickCount + 1)}
+                  onClick={() => setKeyCount(keyCount + 1)}
                   className="h-10 w-10 rounded-lg bg-secondary flex items-center justify-center text-foreground hover:bg-secondary/80 transition-colors"
                 >
                   <Plus className="h-4 w-4" />
@@ -63,19 +63,19 @@ const BrickPurchaseSection = () => {
             </div>
 
             <div className="border-t border-border pt-4 flex items-center justify-between">
-              <span className="text-muted-foreground">Price per brick</span>
-              <span className="text-foreground font-medium">${PRICE_PER_BRICK}</span>
+              <span className="text-muted-foreground">Price per key</span>
+              <span className="text-foreground font-medium">${PRICE_PER_KEY}</span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="text-lg font-semibold text-foreground">Total</span>
               <span className="text-2xl font-bold aurora-text">
-                ${(brickCount * PRICE_PER_BRICK).toLocaleString()}
+                ${(keyCount * PRICE_PER_KEY).toLocaleString()}
               </span>
             </div>
 
             <Button variant="aurora" size="lg" className="w-full rounded-xl py-6 text-base">
-              Buy {brickCount} Brick{brickCount > 1 ? "s" : ""}
+              Buy {keyCount} Key{keyCount > 1 ? "s" : ""}
             </Button>
 
             <div className="flex items-start gap-2 text-sm text-muted-foreground">
