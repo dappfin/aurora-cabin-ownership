@@ -1,11 +1,15 @@
 import { createConfig, http } from 'wagmi';
-import { arbitrum } from 'wagmi/chains';
+import { arbitrum, aurora } from 'wagmi/chains';
 import { injected, walletConnect, coinbaseWallet } from '@wagmi/connectors';
 
-const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID || 'demo-project-id';
+const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID;
+
+if (!WALLETCONNECT_PROJECT_ID) {
+  throw new Error('VITE_WALLET_CONNECT_PROJECT_ID is not set in environment variables');
+}
 
 export const wagmiConfig = createConfig({
-  chains: [arbitrum],
+  chains: [arbitrum, aurora],
   connectors: [
     injected(),
     walletConnect({
@@ -23,5 +27,6 @@ export const wagmiConfig = createConfig({
   ],
   transports: {
     [arbitrum.id]: http(),
+    [aurora.id]: http(),
   },
 });
