@@ -1,17 +1,56 @@
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import { Button } from "@/components/ui/button";
-import { Wallet, Minus, Plus, Info, ShieldCheck } from "lucide-react";
+import { Minus, Plus, Info, ShieldCheck, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { useKYC } from "@/contexts/KYCContext";
+import KYCVerification from "./KYCVerification";
 
 const PRICE_PER_KEY = 200;
 
+// Placeholder contract config — replace with real values
+const VAULT_CONTRACT_ADDRESS = import.meta.env.VITE_VAULT_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
+
 const BrickPurchaseSection = () => {
   const [keyCount, setKeyCount] = useState(1);
+  const { isConnected } = useAccount();
+  const { isKYCValid, kycStatus } = useKYC();
+  const [txState, setTxState] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+
+  const handleInvest = async () => {
+    if (!isKYCValid) return;
+
+    setTxState('pending');
+    try {
+      // Placeholder for real useWriteContract call:
+      // const { writeContract } = useWriteContract();
+      // await writeContract({
+      //   address: VAULT_CONTRACT_ADDRESS as `0x${string}`,
+      //   abi: VAULT_ABI,
+      //   functionName: 'invest',
+      //   args: [keyCount],
+      //   value: parseEther(String(keyCount * PRICE_PER_KEY)),
+      // });
+      
+      // Simulate for now
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setTxState('success');
+      setTimeout(() => setTxState('idle'), 3000);
+    } catch (err) {
+      console.error('Transaction error:', err);
+      setTxState('error');
+      setTimeout(() => setTxState('idle'), 3000);
+    }
+  };
+
+  const buyButtonLabel = () => {
+    switch (txState) {
+      case 'pending': return 'Transaction Pending…';
+      case 'success': return 'Transaction Successful!';
+      case 'error': return 'Transaction Failed — Retry';
+      default: return `Invest in ${keyCount} Key${keyCount > 1 ? "s" : ""}`;
+    }
+  };
 
   return (
     <section id="buy" className="py-24 px-6">
@@ -30,16 +69,21 @@ const BrickPurchaseSection = () => {
             </h2>
           </div>
           <p className="text-muted-foreground mb-8">
-            Authensure verification required before purchase.
+            {isConnected
+              ? isKYCValid
+                ? 'Identity verified — ready to invest.'
+                : 'Complete Authensure verification before purchase.'
+              : 'Connect your wallet to get started.'}
           </p>
 
-          {/* Wallet connect placeholder */}
-          <Button variant="aurora" className="w-full rounded-xl mb-8 py-5">
-            <Wallet className="mr-2 h-5 w-5" />
-            Connect Wallet
-          </Button>
+          {/* KYC Verification Gate */}
+          {isConnected && !isKYCValid && (
+            <div className="mb-8">
+              <KYCVerification />
+            </div>
+          )}
 
-          {/* Brick selector */}
+          {/* Key selector */}
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Keys</span>
@@ -74,9 +118,40 @@ const BrickPurchaseSection = () => {
               </span>
             </div>
 
-            <Button variant="aurora" size="lg" className="w-full rounded-xl py-6 text-base">
-              Buy {keyCount} Key{keyCount > 1 ? "s" : ""}
+            {/* Invest Button — gated behind KYC */}
+            <Button
+              variant="aurora"
+              size="lg"
+              className="w-full rounded-xl py-6 text-base"
+              disabled={!isKYCValid || txState === 'pending'}
+              onClick={handleInvest}
+            >
+              {txState === 'pending' && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {buyButtonLabel()}
             </Button>
+
+            {/* Transaction feedback */}
+            {txState === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-3 rounded-lg bg-primary/10 border border-primary/20"
+              >
+                <ShieldCheck className="h-4 w-4 text-primary" />
+                <span className="text-sm text-primary font-medium">Transaction confirmed on Arbitrum</span>
+              </motion.div>
+            )}
+
+            {txState === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20"
+              >
+                <Info className="h-4 w-4 text-destructive" />
+                <span className="text-sm text-destructive font-medium">Transaction failed — check wallet and try again</span>
+              </motion.div>
+            )}
 
             <div className="flex items-start gap-2 text-sm text-muted-foreground">
               <Info className="h-4 w-4 mt-0.5 shrink-0" />

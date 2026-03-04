@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import WalletConnectButton from "./WalletConnectButton";
+import ComplianceBadge from "./ComplianceBadge";
 
 const Navbar = () => (
   <motion.nav
@@ -16,9 +17,10 @@ const Navbar = () => (
         <a href="#waitlist" className="text-foreground hover:text-primary transition-colors">Waitlist</a>
         <a href="/travel" className="aurora-text hover:opacity-80 transition-opacity">Travel</a>
       </div>
-      <Button variant="aurora" size="sm" className="rounded-xl text-sm">
-        Connect Wallet
-      </Button>
+      <div className="flex items-center gap-3">
+        <ComplianceBadge />
+        <WalletConnectButton />
+      </div>
     </div>
   </motion.nav>
 );
