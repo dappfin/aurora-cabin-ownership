@@ -18,10 +18,19 @@ interface KYCContextType {
 
 const KYCContext = createContext<KYCContextType | null>(null);
 
+const defaultKYC: KYCContextType = {
+  kycStatus: 'disconnected',
+  isKYCValid: false,
+  isLoading: false,
+  error: null,
+  startVerification: () => {},
+  checkKYCStatus: async () => {},
+  resetKYC: () => {},
+};
+
 export const useKYC = () => {
   const ctx = useContext(KYCContext);
-  if (!ctx) throw new Error('useKYC must be used within KYCProvider');
-  return ctx;
+  return ctx ?? defaultKYC;
 };
 
 export const KYCProvider = ({ children }: { children: ReactNode }) => {
