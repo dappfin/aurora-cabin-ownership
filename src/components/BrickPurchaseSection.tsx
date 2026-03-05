@@ -71,8 +71,8 @@ const BrickPurchaseSection = () => {
           <p className="text-muted-foreground mb-8">
             {isConnected
               ? isKYCValid
-                ? 'Identity verified — ready to invest.'
-                : 'Complete Authensure verification before purchase.'
+                ? 'KYC Verified ✓ — ready to invest.'
+                : 'Complete KYC verification before purchase.'
               : 'Connect your wallet to get started.'}
           </p>
 
