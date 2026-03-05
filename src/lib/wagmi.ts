@@ -1,19 +1,14 @@
 import { createConfig, http } from 'wagmi';
-import { arbitrum, aurora } from 'wagmi/chains';
-import { injected, walletConnect, coinbaseWallet } from '@wagmi/connectors';
+import { arbitrum } from 'wagmi/chains';
+import { walletConnect, injected, coinbaseWallet } from '@wagmi/connectors';
 
-const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID;
-
-if (!WALLETCONNECT_PROJECT_ID) {
-  throw new Error('VITE_WALLET_CONNECT_PROJECT_ID is not set in environment variables');
-}
+const projectId = 'd93ecd859d8e0c7872c34ddb15209e54';
 
 export const wagmiConfig = createConfig({
-  chains: [arbitrum, aurora],
+  chains: [arbitrum],
   connectors: [
-    injected(),
     walletConnect({
-      projectId: WALLETCONNECT_PROJECT_ID,
+      projectId,
       metadata: {
         name: 'Aurora Vault',
         description: 'Aurora Vault — Arctic Investment Platform',
@@ -21,12 +16,12 @@ export const wagmiConfig = createConfig({
         icons: [`${window.location.origin}/favicon.ico`],
       },
     }),
-    coinbaseWallet({
-      appName: 'Aurora Vault',
-    }),
+    injected(),
+    coinbaseWallet({ appName: 'Aurora Vault' }),
   ],
   transports: {
     [arbitrum.id]: http(),
-    [aurora.id]: http(),
   },
 });
+
+export const walletConnectProjectId = projectId;
