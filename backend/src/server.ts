@@ -37,6 +37,26 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Convenience endpoint the frontend expects
+app.get('/api/kyc-status', async (req, res) => {
+  const wallet = req.query.wallet as string;
+  if (!wallet || !/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+    return res.status(400).json({ error: 'Invalid wallet address' });
+  }
+  try {
+    const db = (await import('./database')).Database;
+    const database = new db(process.env.DATABASE_PATH || './database/aurora_vault.db');
+    const user = await database.getUserByWallet(wallet);
+    if (!user) {
+      return res.json({ status: 'not_valid' });
+    }
+    res.json({ status: user.status === 'VERIFIED' ? 'valid' : 'not_valid' });
+  } catch (err: any) {
+    console.error('kyc-status error:', err);
+    res.status(500).json({ error: 'Internal error' });
+  }
+});
+
 // API Routes
 app.use('/api/kyc', kycRoutes);
 app.use('/api/webhooks', webhookRoutes);
